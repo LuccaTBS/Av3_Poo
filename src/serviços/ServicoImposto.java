@@ -1,9 +1,9 @@
 package serviços;
 
 import entidades.Produto;
-import entidades.acessorios;
-import entidades.console;
-import entidades.jogos;
+import entidades.Acessorios;
+import entidades.Console;
+import entidades.Jogos;
 
 public class ServicoImposto {
 	private imposto servicoImposto;

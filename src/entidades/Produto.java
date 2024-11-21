@@ -1,19 +1,12 @@
 package entidades;
 
+
 public abstract class Produto {
 	private Double preco;
 	private Integer codigo;
 	private String nome;
 	private Integer quantidade;
-	private Double imposto; 
 
-	public Double getImposto() {
-		return imposto;
-	}
-
-	public void setImposto(Double imposto) {
-		this.imposto = imposto;
-	}
 
 	public Double getPreco() {
 		return preco;
@@ -49,16 +42,13 @@ public abstract class Produto {
 
 
 	
-	public Produto(Double preco, Integer codigo, String nome, Integer quantidade, Double imposto) {
+	public Produto(Double preco, Integer codigo, String nome, Integer quantidade) {
 		super();
 		this.preco = preco;
 		this.codigo = codigo;
 		this.nome = nome;
 		this.quantidade = quantidade;
-		this.imposto = imposto;
+		
 	}
 
-	public Double calculaPreco(){
-		return preco*imposto;
-	} 
 }
