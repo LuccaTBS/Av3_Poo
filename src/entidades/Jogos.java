@@ -17,6 +17,11 @@ public class Jogos extends Produto{
 		this.tipoDeMidia = tipoDeMidia;
 	}
 
+	@Override
+	public String toString() {
+		return "Nome " + super.getNome() + super.toString() +"tipo De Midia - " + tipoDeMidia;
+	}
+
 
 
 

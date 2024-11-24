@@ -4,13 +4,13 @@ public class Console extends Produto {
 
 	private Integer armazenamento;
 	private String cor;
-	private Double peso;
-	private Integer resolucao;
 
+	@Override
+	public String toString() {
+		return "Nome " + super.getNome() + super.toString() + "Cor - " + cor + ", Armazenamento - " + armazenamento;
+	}
 
-
-	public Console(Double preco, Integer codigo, String nome, Integer quantidade, Integer armazenamento,
-			String cor) {
+	public Console(Double preco, Integer codigo, String nome, Integer quantidade, Integer armazenamento, String cor) {
 		super(preco, codigo, nome, quantidade);
 		this.armazenamento = armazenamento;
 		this.cor = cor;
@@ -31,6 +31,5 @@ public class Console extends Produto {
 	public void setCor(String cor) {
 		this.cor = cor;
 	}
-
 
 }
