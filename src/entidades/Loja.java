@@ -55,7 +55,7 @@ public class Loja {
 	public boolean venderItem(int codigo, int quantidade) {
 		int itemIndex = encontrarProduto(codigo);
 
-		if (itemIndex != -1 && produtos.get(itemIndex).getQuantidade() >= quantidade) {
+		if (produtos.get(itemIndex).getQuantidade() >= quantidade && itemIndex != -1) {
 
 			Produto produtoVenda = produtos.get(itemIndex);
 
@@ -79,6 +79,19 @@ public class Loja {
 			
 		}
 		return produtosAtuais;
+	}
+	public String mostrarProduto(int codigoProduto) {
+		return produtos.get(encontrarProduto(codigoProduto)).toString();
+	}
+	
+	public boolean comprarItem(int codigoProduto, int quantidade) {
+		int indexProduto = encontrarProduto(codigoProduto);
+		if(indexProduto != -1 && quantidade * produtos.get(indexProduto).getPreco() <= dinheiro) {
+			produtos.get(indexProduto).setQuantidade(produtos.get(indexProduto).getQuantidade() + quantidade);
+			dinheiro -= quantidade * produtos.get(indexProduto).getPreco();
+			return true;
+		}
+		return false;
 	}
 
 	public void addDinheiro(double valor) {

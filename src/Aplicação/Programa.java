@@ -1,6 +1,7 @@
 package Aplicação;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import entidades.Acessorios;
@@ -66,7 +67,7 @@ public class Programa {
 		corAux = "Preto";
 
 		produtos.add(new Console(precoAux, codigoAux, nomeAux, quantidadeAux, armazenamentoAux, corAux));
-		
+
 		precoAux = 1000;
 		codigoAux = 69;
 		nomeAux = "Batman";
@@ -75,29 +76,62 @@ public class Programa {
 		tipoAux = "Action Figure";
 
 		produtos.add(new Acessorios(precoAux, codigoAux, nomeAux, quantidadeAux, corAux, tipoAux));
-		
-		
-		Loja loja = new Loja(produtos, "VaporGames", precoAux*10);
-		/* Mensagem de bem vindo
-		 * while{
-		 * Mostrar todos os itens
-		 * Possibilidades a se fazer
-		 	* Mostrar a lista de itens
-		 	* Comprar algum item
-		 	* vender algum item
-		 	* Adicionar Mais credito à loja
-		 	* Sair
-		 * */
+
+		Loja loja = new Loja(produtos, "VaporGames", precoAux * 10);
+		/*
+		 * Mensagem de bem vindo while{ Mostrar todos os itens Possibilidades a se fazer
+		 * Mostrar a lista de itens Comprar algum item vender algum item Adicionar Mais
+		 * credito à loja Sair
+		 */
 		boolean rodarPrograma = true;
 		Scanner sc = new Scanner(System.in);
-		
-		while(rodarPrograma) {
+		int opcaoEscolhida;
+		int indexProduto;
+		while (rodarPrograma) {
+			System.out.println("\n\n---------Menu Principal---------\n\n");
 			System.out.print(loja.mostrarProdutos());
+			System.out.println("Dinheiro Total: "+ loja.getDinheiro()+" R$");
 			System.out.println("Informe como Deseja prosseguir:\n\nComprar Algum produto (1)\nVender algum produto (2)"
 					+ "\nAdicionar Mais Créditos à loja (3)\nEncerrar o programa (4)");
-			
-			rodarPrograma = false;
+			try {
+				opcaoEscolhida = sc.nextInt();
+
+				if (opcaoEscolhida == 1) {
+					System.out.println("Comprar produto já existente(1)\nComprar Novo produto(2)");
+					opcaoEscolhida = sc.nextInt();
+					if (opcaoEscolhida == 1) {
+						System.out.print("\nCódigo do Produto a se comprar mais: ");
+						codigoAux = sc.nextInt();
+						System.out.print("\nQuantidade de Produtos a se comprar: ");
+						quantidadeAux = sc.nextInt();
+						if (loja.comprarItem(codigoAux, quantidadeAux)) {
+							System.out.println(loja.mostrarProduto(codigoAux));
+							System.out.println("Produto comprado com sucesso!\n\nVoltando ao menu inicial\n");
+						}
+						else{
+							System.out.println("Código de produto não encontrado ou Dinheiro Insuficiente");
+						}
+					} else if (opcaoEscolhida == 2) {
+						
+					} else {
+						System.out.println("Valor Inválido, Voltando ao menu inicial");
+					}
+
+				}
+			} catch (InputMismatchException e) {
+
+				System.out.println("Valor Inválido, Voltando ao menu inicial");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				opcaoEscolhida = -1;
+				sc.next();
+			}
 		}
+
 	}
 
 }
