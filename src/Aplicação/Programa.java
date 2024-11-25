@@ -155,10 +155,23 @@ public class Programa {
 									System.out.println("Opcao Inválida, voltando ao menu inicial");
 								}
 
-							}
-							else if(opcaoEscolhida == 2) {
+							} else if (opcaoEscolhida == 2) {
 								System.out.print("Armazenamento: ");
 								armazenamentoAux = sc.nextInt();
+								System.out.print("Cor: ");
+								sc.nextLine();
+								corAux = sc.nextLine();
+								consoleAux = new Console(precoAux, codigoAux, nomeAux, quantidadeAux, armazenamentoAux,
+										corAux);
+								if (loja.comprarItem(consoleAux)) {
+									System.out.println(consoleAux);
+									System.out.println("Produto Adicionado com Sucesso!");
+								} else {
+									System.out.println("Opcao Inválida, voltando ao menu inicial");
+								}
+
+							}
+							else if(opcaoEscolhida == 3) {
 								
 							}
 
