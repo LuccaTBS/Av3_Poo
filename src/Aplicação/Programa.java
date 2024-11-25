@@ -84,13 +84,16 @@ public class Programa {
 		 * credito à loja Sair
 		 */
 		boolean rodarPrograma = true;
+		Jogos jogoAux;
+		Console consoleAux;
+		Acessorios acessorioAux;
 		Scanner sc = new Scanner(System.in);
 		int opcaoEscolhida;
 		int indexProduto;
 		while (rodarPrograma) {
 			System.out.println("\n\n---------Menu Principal---------\n\n");
 			System.out.print(loja.mostrarProdutos());
-			System.out.println("Dinheiro Total: "+ loja.getDinheiro()+" R$");
+			System.out.println("Dinheiro Total: " + loja.getDinheiro() + " R$");
 			System.out.println("Informe como Deseja prosseguir:\n\nComprar Algum produto (1)\nVender algum produto (2)"
 					+ "\nAdicionar Mais Créditos à loja (3)\nEncerrar o programa (4)");
 			try {
@@ -107,12 +110,62 @@ public class Programa {
 						if (loja.comprarItem(codigoAux, quantidadeAux)) {
 							System.out.println(loja.mostrarProduto(codigoAux));
 							System.out.println("Produto comprado com sucesso!\n\nVoltando ao menu inicial\n");
-						}
-						else{
+						} else {
 							System.out.println("Código de produto não encontrado ou Dinheiro Insuficiente");
 						}
 					} else if (opcaoEscolhida == 2) {
-						
+						System.out.print("\nCódigo do Produto a se comprar: ");
+						codigoAux = sc.nextInt();
+						if (loja.encontrarProduto(codigoAux) == -1) {
+							System.out.println("\nInforme o Tipo de produto\n Jogo (1), Console (2), Acessorio (3)");
+							opcaoEscolhida = sc.nextInt();
+							System.out.print("Informe os dados do produto!\n\nNome:");
+							sc.nextLine();
+							nomeAux = sc.nextLine();
+							System.out.print("Preço: ");
+							precoAux = sc.nextDouble();
+							System.out.print("Quantidade: ");
+							quantidadeAux = sc.nextInt();
+							if (opcaoEscolhida == 1) {
+								System.out.println("Tipo de midia: Física (1), Digital (2)");
+								opcaoEscolhida = sc.nextInt();
+								if (opcaoEscolhida == 1) {
+									tipoMidia = "Fisica";
+									jogoAux = new Jogos(precoAux, codigoAux, nomeAux, quantidadeAux, tipoMidia);
+									if (loja.comprarItem(jogoAux)) {
+										System.out.println(jogoAux);
+										System.out.println("Produto Adicionado com Sucesso!");
+									} else {
+										System.out.println("Dinheiro Insuficiente para Efetuar a compra!"
+												+ "\nTente diminuir a Quantidade ou Adicionar mais dinheiro!");
+									}
+
+								} else if (opcaoEscolhida == 2) {
+									tipoMidia = "Digital";
+									jogoAux = new Jogos(precoAux, codigoAux, nomeAux, quantidadeAux, tipoMidia);
+									if (loja.comprarItem(jogoAux)) {
+										System.out.println(jogoAux);
+										System.out.println("Produto Adicionado com Sucesso!");
+									} else {
+										System.out.println("Dinheiro Insuficiente para Efetuar a compra!"
+												+ "\nTente diminuir a Quantidade ou Adicionar mais dinheiro!");
+									}
+
+								} else {
+									System.out.println("Opcao Inválida, voltando ao menu inicial");
+								}
+
+							}
+							else if(opcaoEscolhida == 2) {
+								System.out.print("Armazenamento: ");
+								armazenamentoAux = sc.nextInt();
+								
+							}
+
+						} else {
+							System.out.println("Código Já esta no banco de dados!\nVoltando ao menu inicial");
+						}
+
 					} else {
 						System.out.println("Valor Inválido, Voltando ao menu inicial");
 					}

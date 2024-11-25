@@ -37,7 +37,9 @@ public class Loja {
 		if (prod.getPreco() * prod.getQuantidade() > dinheiro) {
 			return false;
 		}
+		dinheiro -= prod.getPreco()*prod.getQuantidade();
 		produtos.add(prod);
+		
 		return true;
 	}
 
