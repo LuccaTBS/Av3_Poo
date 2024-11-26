@@ -1,7 +1,9 @@
 package entidades;
 
+//Classe Console, ela estende a classe Produto
 public class Console extends Produto {
 
+	//Atributos específicos de Console
 	private Integer armazenamento;
 	private String cor;
 
@@ -10,12 +12,14 @@ public class Console extends Produto {
 		return "Nome " + super.getNome() + super.toString() + "Cor - " + cor + ", Armazenamento - " + armazenamento;
 	}
 
+	//Construtor da classe Console
 	public Console(Double preco, Integer codigo, String nome, Integer quantidade, Integer armazenamento, String cor) {
 		super(preco, codigo, nome, quantidade);
 		this.armazenamento = armazenamento;
 		this.cor = cor;
 	}
 
+	//Metodos Getters e Setters
 	public Integer getArmazenamento() {
 		return armazenamento;
 	}
