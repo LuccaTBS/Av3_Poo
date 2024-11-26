@@ -68,16 +68,15 @@ public class Programa {
 
 		produtos.add(new Console(precoAux, codigoAux, nomeAux, quantidadeAux, armazenamentoAux, corAux));
 
-		precoAux = 1000;
+		precoAux = 100;
 		codigoAux = 69;
-		nomeAux = "Batman";
+		nomeAux = "Arkham Asylum";
 		quantidadeAux = 1;
-		corAux = "Preto";
-		tipoAux = "Action Figure";
+		tipoMidia = "Física";
 
-		produtos.add(new Acessorios(precoAux, codigoAux, nomeAux, quantidadeAux, corAux, tipoAux));
+		produtos.add(new Jogos(precoAux, codigoAux, nomeAux, quantidadeAux, tipoMidia));
 
-		Loja loja = new Loja(produtos, "VaporGames", precoAux * 10);
+		Loja loja = new Loja(produtos, "VaporGames", precoAux * 100);
 		/*
 		 * Mensagem de bem vindo while{ Mostrar todos os itens Possibilidades a se fazer
 		 * Mostrar a lista de itens Comprar algum item vender algum item Adicionar Mais
@@ -95,7 +94,7 @@ public class Programa {
 			System.out.print(loja.mostrarProdutos());
 			System.out.println("Dinheiro Total: " + loja.getDinheiro() + " R$");
 			System.out.println("Informe como Deseja prosseguir:\n\nComprar Algum produto (1)\nVender algum produto (2)"
-					+ "\nAdicionar Mais Créditos à loja (3)\nEncerrar o programa (4)");
+					+ "\nAdicionar Mais Créditos à loja (3)\nEncerrar o programa (4)\n Mostrar os produtos (5)");
 			try {
 				opcaoEscolhida = sc.nextInt();
 
@@ -170,9 +169,50 @@ public class Programa {
 									System.out.println("Opcao Inválida, voltando ao menu inicial");
 								}
 
-							}
-							else if(opcaoEscolhida == 3) {
-								
+							} else if (opcaoEscolhida == 3) {
+								System.out.print("Cor: ");
+								sc.nextLine();
+								corAux = sc.nextLine();
+								System.out.println("Tipo de acessorio: HeadSet (1), Mouse (2), Controle (3)");
+								opcaoEscolhida = sc.nextInt();
+								if (opcaoEscolhida == 1) {
+									tipoAux = "Headset";
+									acessorioAux = new Acessorios(precoAux, codigoAux, nomeAux, quantidadeAux, corAux,
+											tipoAux);
+									if (loja.comprarItem(acessorioAux)) {
+										System.out.println(acessorioAux);
+										System.out.println("Produto Adicionado com Sucesso!");
+									} else {
+										System.out.println("Dinheiro Insuficiente para Efetuar a compra!"
+												+ "\nTente diminuir a Quantidade ou Adicionar mais dinheiro!");
+									}
+
+								} else if (opcaoEscolhida == 2) {
+									tipoAux = "Mouse";
+									acessorioAux = new Acessorios(precoAux, codigoAux, nomeAux, quantidadeAux, corAux,
+											tipoAux);
+									if (loja.comprarItem(acessorioAux)) {
+										System.out.println(acessorioAux);
+										System.out.println("Produto Adicionado com Sucesso!");
+									} else {
+										System.out.println("Dinheiro Insuficiente para Efetuar a compra!"
+												+ "\nTente diminuir a Quantidade ou Adicionar mais dinheiro!");
+									}
+
+								} else if (opcaoEscolhida == 3) {
+									tipoAux = "Controle";
+									acessorioAux = new Acessorios(precoAux, codigoAux, nomeAux, quantidadeAux, corAux,
+											tipoAux);
+									if (loja.comprarItem(acessorioAux)) {
+										System.out.println(acessorioAux);
+										System.out.println("Produto Adicionado com Sucesso!");
+									} else {
+										System.out.println("Dinheiro Insuficiente para Efetuar a compra!"
+												+ "\nTente diminuir a Quantidade ou Adicionar mais dinheiro!");
+									}
+								} else {
+									System.out.println("Opcao Inválida, voltando ao menu inicial");
+								}
 							}
 
 						} else {
@@ -183,6 +223,32 @@ public class Programa {
 						System.out.println("Valor Inválido, Voltando ao menu inicial");
 					}
 
+				} else if (opcaoEscolhida == 2) {
+					System.out.print("Digite o Código do item que Pretende vender\nCódigo: ");
+					codigoAux = sc.nextInt();
+					if (loja.encontrarProduto(codigoAux) != -1) {
+						System.out.print("Quantidade de produtos a serem vendidos: ");
+						quantidadeAux = sc.nextInt();
+						if (loja.venderItem(codigoAux, quantidadeAux)) {
+							System.out.println("Venda Concluida com Sucesso!");
+						} else {
+							System.out.println(
+									"Quantidade de produtos a serem vendidos excede a quantidade em estoque!\n\n Retornando ao menu inicial");
+						}
+					} else {
+						System.out.println("Código inválido!\nRetornando ao menu Principal");
+					}
+				} else if (opcaoEscolhida == 3) {
+					System.out.print("Digite quanto dinheiro deseja Investir na Loja: ");
+					precoAux = sc.nextDouble();
+					loja.setDinheiro(loja.getDinheiro()+precoAux);
+					System.out.println("Investimento Completo!");
+				} else if (opcaoEscolhida == 4) {
+					rodarPrograma = false;
+				} else if (opcaoEscolhida == 5) {
+
+				} else {
+					System.out.println("Essa opção não é valida. Digite uma opcão valida!");
 				}
 			} catch (InputMismatchException e) {
 
