@@ -1,11 +1,15 @@
 package entidades;
 
+//Classe abstrata Produto, ela define os atributos e os métodos comuns a todos os produtos
 public abstract class Produto {
+
+	//Atributos comuns de cada produto
 	private Double preco;
 	private Integer codigo;
 	private String nome;
 	private Integer quantidade;
 
+	//Metodos Getters e Setters
 	public Double getPreco() {
 		return preco;
 	}
@@ -43,6 +47,7 @@ public abstract class Produto {
 		this.quantidade = quantidade;
 	}
 
+	//Construtor da classe Produto
 	public Produto(Double preco, Integer codigo, String nome, Integer quantidade) {
 		super();
 		this.preco = preco;
